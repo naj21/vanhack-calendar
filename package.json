@@ -6,12 +6,10 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "husky": "^5.0.9",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
+    "styled-components": "^5.2.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -24,13 +22,18 @@
     "extends": [
       "react-app",
       "plugin:prettier/recommended"
-    ]
+    ],
+    "rules": {
+      "no-console": "warn",
+      "import/first": "warn",
+      "prettier/prettier": "warn",
+      "import/no-anonymous-default-export": "off"
+    }
   },
   "prettier": {
     "printWidth": 85,
     "semi": true,
-    "tabWidth": 2,
-    "singleQuote": false
+    "tabWidth": 2
   },
   "browserslist": {
     "production": [
@@ -53,5 +56,12 @@
     "src/**/*.{js,jsx,json,css,scss,md}": [
       "prettier --write"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^5.0.9",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1"
   }
 }
