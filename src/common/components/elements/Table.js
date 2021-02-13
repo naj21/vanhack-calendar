@@ -2,11 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Media from "react-media";
 
-const TableWrapper = styled.div`
-  padding: 45px 60px;
-  backgrgound: ${({ theme }) => theme.colors.gray10};
-`;
-
 // <thead>
 const TableHead = styled.div`
   position: relative;
@@ -36,11 +31,6 @@ const TableGroup = styled.div`
   margin: 25px 0 12px;
   font-size: ${({ theme }) => theme.font.sizes.medium};
   font-weight: ${({ theme }) => theme.font.weight.bold};
-`;
-
-// <col>
-const TableColumn = styled.div`
-  display: table-column;
 `;
 
 // <th>
@@ -119,7 +109,7 @@ const TableContainer = styled.div`
 `;
 
 function Table(props) {
-  const { fields, elements, categories, loading } = props;
+  const { fields, elements, category, loading } = props;
   const renderHeaders = () => {
     return fields.map((field, index) => {
       return (
@@ -142,7 +132,9 @@ function Table(props) {
         <TableCell key={index}>{value ? value : field.render(element)}</TableCell>
       );
       return field.displaySize ? (
-        <Media query={field.displaySize}>{fieldElement}</Media>
+        <Media query={field.displaySize} key={index}>
+          {fieldElement}
+        </Media>
       ) : (
         fieldElement
       );
@@ -150,23 +142,31 @@ function Table(props) {
   };
 
   const renderElements = () => {
-    const groupedElements = {};
-    elements.forEach((element) => {
-      if (!groupedElements[element.status]) {
-        groupedElements[element.status] = [element];
-      } else {
-        groupedElements[element.status].push(element);
-      }
-    });
+    if (category) {
+      const groupedElements = {};
+      elements.forEach((element) => {
+        if (!groupedElements[element[category]]) {
+          groupedElements[element[category]] = [element];
+        } else {
+          groupedElements[element[category]].push(element);
+        }
+      });
 
-    return Object.entries(groupedElements).map(([key, value]) => (
-      <>
-        <TableGroup key={key} colspan="3">{key}</TableGroup>
-        {value.map((element, index) => (
-          <TableRow key={index}>{renderElementFields(element)}</TableRow>
-        ))}
-      </>
-    ));
+      return Object.entries(groupedElements).map(([key, value]) => (
+        <>
+          <TableGroup key={key} colspan="3">
+            {key}
+          </TableGroup>
+          {value.map((element, index) => (
+            <TableRow key={index}>{renderElementFields(element)}</TableRow>
+          ))}
+        </>
+      ));
+    } else {
+      return elements.map((element, index) => (
+        <TableRow key={index}>{renderElementFields(element)}</TableRow>
+      ));
+    }
   };
 
   return (
