@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import Media from "react-media";
+import { mediaQueries } from "../../utils/browser";
 
 // <thead>
 const TableHead = styled.div`
@@ -23,12 +24,27 @@ const TableBody = styled.div`
 
 // <tr>
 const TableRow = styled.div`
-  display: table-row;
   position: relative;
+  display: table-row;
+
+  &::after {
+    position: absolute;
+    content: "";
+    height: ${({ height }) => `${height}px`};
+    left: 0;
+    right: 0;
+    background: ${({ background }) => background || "none"};
+  }
+
+  @media ${mediaQueries.small} {
+    &::after {
+      height: ${({ height }) => `calc(${height}px + 10px)`};
+    }
+  }
 `;
 
 const TableGroup = styled.div`
-  margin: 25px 0 12px;
+  margin: 30px 0 12px;
   font-size: ${({ theme }) => theme.font.sizes.medium};
   font-weight: ${({ theme }) => theme.font.weight.bold};
 `;
@@ -42,8 +58,10 @@ const TableHeaderCell = styled.div`
 
 // <td>
 const TableCell = styled.div`
+  position: relative;
   display: table-cell;
   vertical-align: middle;
+  z-index: 1;
 `;
 
 const HeaderContainer = styled.div`
@@ -72,11 +90,6 @@ const TableContainer = styled.div`
     &:first-of-type {
       > div {
         padding-top: 28px;
-      }
-    }
-    &:last-of-type {
-      > div {
-        padding-bottom: 28px;
       }
     }
   }
@@ -109,7 +122,24 @@ const TableContainer = styled.div`
 `;
 
 function Table(props) {
-  const { fields, elements, category, loading } = props;
+  const { fields, elements, category, loading, categoryBackgrounds } = props;
+  const [ref, setRef] = useState();
+  const [rowHeight, setRowHeight] = useState();
+
+  const onRefChange = useCallback((node) => {
+    setRef(node);
+    if (node) {
+      setRowHeight(node.offsetHeight + 6);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setRowHeight(ref && ref.offsetHeight + 6);
+    });
+    return () => window.removeEventListener("resize", null);
+  });
+
   const renderHeaders = () => {
     return fields.map((field, index) => {
       return (
@@ -157,9 +187,23 @@ function Table(props) {
           <TableGroup key={key} colspan="3">
             {key}
           </TableGroup>
-          {value.map((element, index) => (
-            <TableRow key={index}>{renderElementFields(element)}</TableRow>
-          ))}
+          {value.map((element, index) => {
+            const background =
+              categoryBackgrounds &&
+              categoryBackgrounds.find((item) => item.category === key);
+            const color = background && background.color;
+
+            return (
+              <TableRow
+                key={index}
+                background={color}
+                ref={onRefChange}
+                height={rowHeight}
+              >
+                {renderElementFields(element)}
+              </TableRow>
+            );
+          })}
         </>
       ));
     } else {
