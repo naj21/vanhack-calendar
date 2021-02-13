@@ -31,10 +31,13 @@ const TabList = styled.ul`
   background: #ffffff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 13px 44px;
-  @media (min-width: 1440px) {
+  @media (min-width: 1441px) {
     padding-left: calc(10% - 15px);
     padding-right: calc(10% - 15px);
     margin: auto;
+  }
+  @media ${mediaQueries.notLarge} {
+    padding: 13px 30px;
   }
   @media ${mediaQueries.small} {
     padding: 13px 15px;
@@ -73,10 +76,13 @@ export const TabContent = styled.div`
   padding: 45px 60px;
   background: ${({ theme }) => theme.colors.gray10};
   overflow-x: hidden;
-  @media (min-width: 1440px) {
+  @media (min-width: 1441px) {
     padding-left: 10%;
     padding-right: 10%;
     margin: auto;
+  }
+  @media ${mediaQueries.notLarge} {
+    padding: 45px 30px;
   }
   @media ${mediaQueries.small} {
     padding: 45px 15px;
