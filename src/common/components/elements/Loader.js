@@ -5,6 +5,12 @@ const spin = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
+/**
+ * Loader examples
+ *
+ * @example ./docs/Loader.md
+ */
+
 const Loader = styled.div`
   display: block;
   border: 2px solid ${({ theme }) => theme.colors.bgGray};
@@ -16,4 +22,5 @@ const Loader = styled.div`
   animation: ${spin} 1s linear infinite;
 `;
 
+/** @component */
 export default Loader;

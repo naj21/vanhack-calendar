@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import themes from "./common/utils/themes";
 import configureStore from "./store";
 import { init } from "./common/utils/api";
-import "./App.css";
 import Calendar from "./calendar";
 
 const store = configureStore();
@@ -32,7 +31,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={themes} className="App">
+      <ThemeProvider theme={themes}>
         <Calendar />
       </ThemeProvider>
     </Provider>

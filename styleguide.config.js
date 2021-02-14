@@ -1,3 +1,8 @@
+const path = require("path");
+
 module.exports = {
-  components: './src/common/components/elements/**/*.js',
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, "src/styleguide/Wrapper"),
+  },
+  components: "./src/common/components/elements/**/*.js",
 };

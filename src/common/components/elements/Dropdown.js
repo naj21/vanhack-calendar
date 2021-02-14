@@ -50,6 +50,14 @@ export const Option = styled.a`
   }
 `;
 
+const getTopPosition = (ref) => {
+  return ref.current && ref.current.getBoundingClientRect().top + window.scrollY;
+};
+
+const getLeftPosition = (ref) => {
+  return ref.current && ref.current.getBoundingClientRect().right + window.scrollX;
+};
+
 /**
  * Dropdown examples
  *
@@ -66,8 +74,8 @@ const Dropdown = ({ children, icon, sm }) => {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      setTop(ref.current && ref.current.getBoundingClientRect().top);
-      setLeft(ref.current && ref.current.getBoundingClientRect().right);
+      setTop(getTopPosition(ref));
+      setLeft(getLeftPosition(ref));
     });
     return () => window.removeEventListener("resize", null);
   });
@@ -77,8 +85,8 @@ const Dropdown = ({ children, icon, sm }) => {
   }, [dropDownPortalElement, dropDownPortalContainer, isOpen]);
 
   useEffect(() => {
-    setTop(ref.current && ref.current.getBoundingClientRect().top);
-    setLeft(ref.current && ref.current.getBoundingClientRect().right);
+    setTop(getTopPosition(ref));
+    setLeft(getLeftPosition(ref));
     const handleClickOutside = (e) => {
       if (ref && !ref.current.contains(e.target)) {
         setIsOpen(false);

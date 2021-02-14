@@ -6,6 +6,14 @@
     url("./common/utils/fonts/Inter-Regular.ttf") format("woff");
 }
 
+@font-face {
+  font-family: "InterMedium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Inter-Medium"),
+    url("./common/utils/fonts/Inter-Medium.ttf") format("woff");
+}
+
 body {
   width: 100%;
   overflow-x: hidden;

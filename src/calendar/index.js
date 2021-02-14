@@ -20,8 +20,9 @@ import Media from "react-media";
 import TeamAvatar from "../common/components/elements/TeamAvatar";
 import themes from "../common/utils/themes";
 import { getCalendarThunk } from "./redux/thunks";
+import { team } from "../common/utils/mocks";
 
-const CandidateContainer = styled.div`
+export const CandidateContainer = styled.div`
   display: flex;
   @media ${mediaQueries.small} {
     flex-direction: column;
@@ -83,6 +84,8 @@ const Header = styled.header`
   }
   h2 {
     font-size: ${({ theme }) => theme.font.sizes.large};
+    font-family: "InterMedium", sans-serif;
+    color: ${({ theme }) => theme.colors.gray90};
     margin-right: 12px;
     + div {
       transform: translateY(3px);
@@ -103,44 +106,11 @@ const TagContainer = styled.div`
   }
 `;
 
-const team = [
-  {
-    id: 1,
-    name: "Jorge Watson",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile1.png",
-  },
-  {
-    id: 2,
-    name: "Brooklyn Simmons",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile2.png",
-  },
-  {
-    id: 3,
-    name: "Esther Howard",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile3.png",
-  },
-  {
-    id: 4,
-    name: "Emma Fox",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile4.png",
-  },
-  {
-    id: 5,
-    name: "Cameron Williamson",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile5.png",
-  },
-  {
-    id: 6,
-    name: "Cleveland Booker",
-    image:
-      "https://static.wikia.nocookie.net/memoryalpha/images/3/3b/Cleveland_Booker.jpg/revision/latest?cb=20201204211352&path-prefix=en",
-  },
-];
+const RejectText = styled.span`
+  font-size: ${({ theme }) => theme.font.sizes.small};
+  margin-left: 30px;
+  cursor: pointer;
+`;
 
 class Calendar extends Component {
   componentDidMount() {
@@ -205,9 +175,7 @@ class Calendar extends Component {
           return (
             <>
               {!waiting && <Button sm>{text}</Button>}
-              {done && (
-                <span style={{ marginLeft: "30px", cursor: "pointer" }}>Reject</span>
-              )}
+              {done && <RejectText>Reject</RejectText>}
             </>
           );
         },
@@ -248,7 +216,7 @@ class Calendar extends Component {
         categoryBackgrounds={[
           {
             category: "Scheduled",
-            color: themes.colors.lgihtBlue,
+            color: themes.colors.lightBlue,
           },
         ]}
         loading={loading}

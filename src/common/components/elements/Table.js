@@ -8,13 +8,7 @@ const TableHead = styled.div`
   position: relative;
   display: table-header-group;
   width: inherit;
-  &::after {
-    position: absolute;
-    content: "";
-    left: 0;
-    right: 0;
-    border: 1px solid ${({ theme }) => theme.colors.gray20};
-  }
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray20};
 `;
 
 // <tbody>
@@ -38,8 +32,10 @@ const TableRow = styled.div`
 
 const TableGroup = styled.div`
   margin: 30px 0 12px;
+  color: ${({ theme }) => theme.colors.black80};
   font-size: ${({ theme }) => theme.font.sizes.medium};
-  font-weight: ${({ theme }) => theme.font.weight.bold};
+  font-weight: ${({ theme }) => theme.font.weight.bolder};
+  font-family: "InterMedium", sans-serif;
 `;
 
 // <th>
@@ -75,6 +71,7 @@ const TableContainer = styled.div`
   display: table;
   width: 100%;
   text-align: left;
+  border-collapse: collapse;
   border-spacing: 0;
   > ${TableBody} > ${TableRow} {
     > div {
@@ -104,7 +101,7 @@ const TableContainer = styled.div`
 
   ${TableCell} {
     white-space: normal;
-    font-size: ${({ theme }) => theme.font.sizes.normal};
+    font-size: ${({ theme }) => `calc(${theme.font.sizes.small} + 1px)`};
     color: ${({ theme }) => theme.colors.gray80};
 
     &:last-child {
@@ -113,6 +110,12 @@ const TableContainer = styled.div`
     }
   }
 `;
+
+/**
+ * Table examples
+ *
+ * @example ./docs/Table.md
+ */
 
 function Table(props) {
   const { fields, elements, category, loading, categoryBackgrounds } = props;
@@ -222,4 +225,5 @@ function Table(props) {
   );
 }
 
+/** @component */
 export default Table;

@@ -1,7 +1,8 @@
+
 ```js padded
 import Button from '../Button';
 <>
-  <Button theme={theme}>Primary</Button>
-  <Button theme={theme} sm>Small</Button>
+  <Button>Edit Job</Button>
+  <Button sm>Get interview link</Button>
 </>;
 ```

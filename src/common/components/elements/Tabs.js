@@ -2,30 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { mediaQueries } from "../../utils/browser";
 
-function Tabs(props) {
-  const { tabs } = props;
-  const [selectedTab, setSelectedTab] = useState(0);
-
-  return (
-    <div>
-      <TabList className="container">
-        {tabs.map((tab, i) => (
-          <Tab
-            key={i}
-            onClick={() => setSelectedTab(i)}
-            className={`${i === selectedTab && "active"}`}
-          >
-            {tab.label}
-          </Tab>
-        ))}
-      </TabList>
-      <TabContent className="container">{tabs[selectedTab].content}</TabContent>
-    </div>
-  );
-}
-
-export default Tabs;
-
 const TabList = styled.ul`
   display: flex;
   background: #ffffff;
@@ -88,3 +64,34 @@ export const TabContent = styled.div`
     padding: 45px 15px;
   }
 `;
+
+/**
+ * Tabs examples
+ *
+ * @example ./docs/Tabs.md
+ */
+
+function Tabs(props) {
+  const { tabs } = props;
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  return (
+    <div>
+      <TabList className="container">
+        {tabs.map((tab, i) => (
+          <Tab
+            key={i}
+            onClick={() => setSelectedTab(i)}
+            className={`${i === selectedTab && "active"}`}
+          >
+            {tab.label}
+          </Tab>
+        ))}
+      </TabList>
+      <TabContent className="container">{tabs[selectedTab].content}</TabContent>
+    </div>
+  );
+}
+
+/** @component */
+export default Tabs;

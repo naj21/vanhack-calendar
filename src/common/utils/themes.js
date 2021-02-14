@@ -1,7 +1,7 @@
 export default {
   colors: {
     primary: "#0675CE",
-    lgihtBlue: "#D5F2FB",
+    lightBlue: "#D5F2FB",
     yellow: "#FCAB10",
     white: "#FFFFFF",
     bgGray: "#E5E5E5",
@@ -20,7 +20,7 @@ export default {
   font: {
     sizes: {
       large: "20px",
-      normal: "14px",
+      medium: "14px",
       small: "12px",
     },
     weight: {
