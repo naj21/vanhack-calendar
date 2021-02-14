@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 import styled, { css } from "styled-components";
 import Button from "./Button";
 import Card from "./Card";
@@ -19,19 +20,13 @@ const OptionsContainer = styled(Card)`
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: -5px;
-  right: -10px;
   z-index: 10;
 
-  ${({ position }) =>
-    position === "left" &&
+  ${({ top, left }) =>
     css`
-      left: 0;
-    `}
-  ${(position) =>
-    position === "center" &&
-    css`
-      transform: translateX(40%);
+      top: calc(${top}px - 5px);
+      left: ${left}px;
+      transform: translateX(-100%);
     `}
 `;
 
@@ -39,12 +34,10 @@ export const Option = styled.a`
   display: flex;
   font-size: ${({ theme }) => theme.font.sizes.medium};
   cursor: default;
-  color: ${({ theme }) => theme.colors.darkGray};
+  color: ${({ theme }) => theme.colors.gray90};
   text-decoration: none;
-
-  :not(:last-of-type) {
-    margin-bottom: 25px;
-  }
+  padding-top: 12px;
+  padding-bottom: 12px;
 
   :hover {
     background: ${({ theme }) => theme.colors.gray10};
@@ -63,11 +56,29 @@ export const Option = styled.a`
  * @example ./docs/Dropdown.md
  */
 
-const Dropdown = ({ children, text, position, icon, sm }) => {
+const Dropdown = ({ children, icon, sm }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [left, setLeft] = useState(0);
+  const [top, setTop] = useState(0);
   const ref = useRef();
+  const dropDownPortalContainer = document.createElement("div");
+  const dropDownPortalElement = document.getElementById("dropdown");
 
   useEffect(() => {
+    window.addEventListener("resize", () => {
+      setTop(ref.current && ref.current.getBoundingClientRect().top);
+      setLeft(ref.current && ref.current.getBoundingClientRect().right);
+    });
+    return () => window.removeEventListener("resize", null);
+  });
+
+  useEffect(() => {
+    isOpen && dropDownPortalElement.appendChild(dropDownPortalContainer);
+  }, [dropDownPortalElement, dropDownPortalContainer, isOpen]);
+
+  useEffect(() => {
+    setTop(ref.current && ref.current.getBoundingClientRect().top);
+    setLeft(ref.current && ref.current.getBoundingClientRect().right);
     const handleClickOutside = (e) => {
       if (ref && !ref.current.contains(e.target)) {
         setIsOpen(false);
@@ -86,14 +97,16 @@ const Dropdown = ({ children, text, position, icon, sm }) => {
       <DropdownButton onClick={() => setIsOpen(!isOpen)}>
         <img src={icon} alt="dropdown-icon" />
       </DropdownButton>
-      {isOpen && (
+      {ReactDOM.createPortal(
         <OptionsContainer
           onClick={() => setIsOpen(false)}
-          position={position}
           sm={sm}
+          top={top}
+          left={left}
         >
           {children}
-        </OptionsContainer>
+        </OptionsContainer>,
+        dropDownPortalContainer
       )}
     </DropdownContainer>
   );
