@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/vanhack-calendar/static/css/main.ac8f36e0.chunk.css",
+    "main.js": "/vanhack-calendar/static/js/main.2a02db51.chunk.js",
+    "main.js.map": "/vanhack-calendar/static/js/main.2a02db51.chunk.js.map",
+    "runtime-main.js": "/vanhack-calendar/static/js/runtime-main.0ad16e3b.js",
+    "runtime-main.js.map": "/vanhack-calendar/static/js/runtime-main.0ad16e3b.js.map",
+    "static/js/2.d9c4dbc0.chunk.js": "/vanhack-calendar/static/js/2.d9c4dbc0.chunk.js",
+    "static/js/2.d9c4dbc0.chunk.js.map": "/vanhack-calendar/static/js/2.d9c4dbc0.chunk.js.map",
+    "index.html": "/vanhack-calendar/index.html",
+    "static/css/main.ac8f36e0.chunk.css.map": "/vanhack-calendar/static/css/main.ac8f36e0.chunk.css.map",
+    "static/js/2.d9c4dbc0.chunk.js.LICENSE.txt": "/vanhack-calendar/static/js/2.d9c4dbc0.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/vanhack-calendar/static/media/Inter-Regular.fd272b9e.ttf",
+    "static/media/company.be75b2ed.svg": "/vanhack-calendar/static/media/company.be75b2ed.svg",
+    "static/media/dollar.75d586fd.svg": "/vanhack-calendar/static/media/dollar.75d586fd.svg",
+    "static/media/info.a77823e8.svg": "/vanhack-calendar/static/media/info.a77823e8.svg",
+    "static/media/pin.b6b56c30.svg": "/vanhack-calendar/static/media/pin.b6b56c30.svg",
+    "static/media/skills.8a82e6e0.svg": "/vanhack-calendar/static/media/skills.8a82e6e0.svg",
+    "static/media/user-circle.7af6b5ad.svg": "/vanhack-calendar/static/media/user-circle.7af6b5ad.svg",
+    "static/media/v-elipsis.3e2ec19e.svg": "/vanhack-calendar/static/media/v-elipsis.3e2ec19e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0ad16e3b.js",
+    "static/js/2.d9c4dbc0.chunk.js",
+    "static/css/main.ac8f36e0.chunk.css",
+    "static/js/main.2a02db51.chunk.js"
+  ]
+}
