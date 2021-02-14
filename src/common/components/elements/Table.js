@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import Media from "react-media";
-import { mediaQueries } from "../../utils/browser";
+import Loader from "./Loader";
 
 // <thead>
 const TableHead = styled.div`
@@ -24,7 +24,6 @@ const TableBody = styled.div`
 
 // <tr>
 const TableRow = styled.div`
-  position: relative;
   display: table-row;
 
   &::after {
@@ -34,12 +33,6 @@ const TableRow = styled.div`
     left: 0;
     right: 0;
     background: ${({ background }) => background || "none"};
-  }
-
-  @media ${mediaQueries.small} {
-    &::after {
-      height: ${({ height }) => `calc(${height}px + 10px)`};
-    }
   }
 `;
 
@@ -215,16 +208,16 @@ function Table(props) {
 
   return (
     <>
-      {/* {!loading && ( */}
-      <TableContainer>
-        <TableHead>
-          <TableRow>{renderHeaders()}</TableRow>
-        </TableHead>
-        <TableBody>{renderElements()}</TableBody>
-      </TableContainer>
-      {/* )} */}
-
-      {loading && "Loading"}
+      {!loading ? (
+        <TableContainer>
+          <TableHead>
+            <TableRow>{renderHeaders()}</TableRow>
+          </TableHead>
+          <TableBody>{renderElements()}</TableBody>
+        </TableContainer>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 }

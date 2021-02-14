@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import styled from "styled-components";
 import Button from "../common/components/elements/Button";
 import Table from "../common/components/elements/Table";
@@ -17,6 +19,7 @@ import { mediaQueries } from "../common/utils/browser";
 import Media from "react-media";
 import TeamAvatar from "../common/components/elements/TeamAvatar";
 import themes from "../common/utils/themes";
+import { getCalendarThunk } from "./redux/thunks";
 
 const CandidateContainer = styled.div`
   display: flex;
@@ -139,90 +142,11 @@ const team = [
   },
 ];
 
-const elements = [
-  {
-    id: 1,
-    name: "Jorge Watson",
-    title: "FullStack Developer",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2021-05-10T10:40:00",
-    status: "Waiting Confirmation",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile1.png",
-  },
-  {
-    id: 2,
-    name: "Brooklyn Simmons",
-    title: "React Developer",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2021-04-10T10:40:00",
-    status: "Scheduled",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile2.png",
-  },
-  {
-    id: 3,
-    name: "Esther Howard",
-    title: "React Developer",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2021-03-10T10:40:00",
-    status: "Done",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile3.png",
-  },
-  {
-    id: 4,
-    name: "Emma Fox",
-    title: "DevOps Enginner",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2021-02-01T09:40:00",
-    status: "Scheduled",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile4.png",
-  },
-  {
-    id: 5,
-    name: "Cameron Williamson",
-    title: "FullStack Developer",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2020-12-01T10:40:00",
-    status: "Scheduled",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile5.png",
-  },
-  {
-    id: 6,
-    name: "Cleveland Booker",
-    title: "React Developer",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2021-03-10T10:40:00",
-    status: "Done",
-    image:
-      "https://static.wikia.nocookie.net/memoryalpha/images/3/3b/Cleveland_Booker.jpg/revision/latest?cb=20201204211352&path-prefix=en",
-  },
-  {
-    id: 7,
-    name: "Michael Burnham",
-    title: "Full Stack Engineer",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2020-12-01T09:40:00",
-    status: "Scheduled",
-    image:
-      "https://static.wikia.nocookie.net/memoryalpha/images/0/04/Michael_Burnham%2C_3189.png/revision/latest?cb=20201101171419&path-prefix=en",
-  },
-  {
-    id: 8,
-    name: "Cameron Williamson",
-    title: "FullStack Developer",
-    interviewStep: "Technical Interview",
-    scheduledTime: "2020-12-01T10:40:00",
-    status: "Scheduled",
-    image:
-      "https://vanhackblobstorageprod.blob.core.windows.net/publicfiles/profile5.png",
-  },
-];
-
 class Calendar extends Component {
+  componentDidMount() {
+    this.props.getCalendar();
+  }
+
   renderContent = (isCalendar) => {
     const fields = [
       {
@@ -304,16 +228,21 @@ class Calendar extends Component {
       },
     ];
 
+    const {
+      calendar: { data, loading },
+    } = this.props;
     const scheduledElements = [];
-    elements.forEach((element) => {
-      if (element.status === "Scheduled") {
-        scheduledElements.push(element);
-      }
-    });
+    if (!loading) {
+      data.forEach((element) => {
+        if (element.status === "Scheduled") {
+          scheduledElements.push(element);
+        }
+      });
+    }
 
     return (
       <Table
-        elements={isCalendar ? elements : scheduledElements}
+        elements={isCalendar ? data : scheduledElements}
         fields={fields}
         category={isCalendar ? "status" : null}
         categoryBackgrounds={[
@@ -322,7 +251,7 @@ class Calendar extends Component {
             color: themes.colors.lgihtBlue,
           },
         ]}
-        // loading={isLoading()}
+        loading={loading}
       />
     );
   };
@@ -399,4 +328,16 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+function mapStateToProps(state) {
+  return {
+    calendar: state.calendar.events,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getCalendar: bindActionCreators(getCalendarThunk, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

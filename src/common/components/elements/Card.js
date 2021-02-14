@@ -8,16 +8,25 @@ import styled, { css } from "styled-components";
 const Card = styled.div`
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
-  border-radius: ${({ theme }) => theme.border.radius.large};
-  padding: 30px;
-  min-width: 347px;
+  border-radius: ${({ theme }) => theme.border.radius.medium};
+  padding: 20px 0;
+  min-width: 320px;
+  max-width: 347px;
+  > * {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 
   ${({ sm, theme }) =>
     sm &&
     css`
-      padding: 20px;
-      border-radius: ${theme.border.radius.medium};
-      min-width: 200px;
+      padding: 10px 0;
+      border-radius: ${theme.border.radius.small};
+      min-width: 230px;
+      > * {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
     `}
 `;
 
