@@ -24,8 +24,13 @@ This project is intended to run on a browser.
 
 Before starting anything else, you must run `yarn install` at the root of the project.
 
-To run Vanhack Calendar on a browser, you can simply run `yarn start` (this will automatically point to the QA environment).
+To run Vanhack Calendar on a browser, you can simply run `yarn start`.
 It will be available at [http://localhost:3000](http://localhost:3000).
+
+### General Components
+
+If you're creating a new component and it's something really generic like a Checkbox, you should include it in the `src/common/components` folder.
+Follow an organization similar to the one used by [semantic-ui-react](https://react.semantic-ui.com/).
 
 ## Documentation
 
@@ -36,3 +41,9 @@ run `yarn styleguide`.
 
 For examples of how to create component documentation within our project, check the components in _src/common/components/elements_.
 Notice the _docs_ folder.
+
+## Deploy & Infrasttructure
+
+For now we are using manual deploys to githubpages. To deploy, you can use the command `yarn deploy`.
+
+The deploy will be available at [https://naj21.github.io/vanhack-calendar/](https://naj21.github.io/vanhack-calendar/)
