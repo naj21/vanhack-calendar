@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Vanhack Calendar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the Vanhack Calendar Web project. A project that allows administrators to manage their interview schedules.
 
-## Available Scripts
+## Development
 
-In the project directory, you can run:
+### Essential tools
 
-### `yarn start`
+You should install the following tools:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [node](https://nodejs.org/en/) >= 10.13.0
+- [yarn](https://yarnpkg.com/lang/en/) >= 1.13.0
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+If you have other project that requires a different version of node, consider using `nvm`, `avn` or any other
+version manager (the project only contains .nvmrc and .node-version files).
 
-### `yarn test`
+### Project structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We are taking an approach similar to group by feature ([https://reactjs.org/docs/faq-structure.html](https://reactjs.org/docs/faq-structure.html)).
 
-### `yarn build`
+### Running the project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project is intended to run on a browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Before starting anything else, you must run `yarn install` at the root of the project.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run Vanhack Calendar on a browser, you can simply run `yarn start` (this will automatically point to the QA environment).
+It will be available at [http://localhost:3000](http://localhost:3000).
 
-### `yarn eject`
+## Documentation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To make sure we don't repeat component implementation, we installed [react-styleguidist](https://github.com/styleguidist/react-styleguidist)
+which allows us to create a component showcase. To start the component showcase
+(in development mode, i.e. use this while you're creating documentation or if you just want to quickly check the component guide locally)
+run `yarn styleguide`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For examples of how to create component documentation within our project, check the components in _src/common/components/elements_.
+Notice the _docs_ folder.
